@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SpringBootRestAPI.Bean.Students;
@@ -56,5 +57,21 @@ public class ApiController {
 		return new Students(studentId, fullName);
 	}
 	
+	//Story of Request Param
+	//localhost:9090/student/query?id=1
+	
+	@GetMapping("/students/query")
+	public Students studentRequestParam( @RequestParam int id) {
+		Students stud = new Students(id, "Dr. Jhon");
+		
+		return stud;
+	}
+	
+	//localhost:9090/student/query/multiple?id=1&name=sdbravo40
+	@GetMapping("/students/query/multiple")
+	public Students studentRequestParams(@RequestParam int id, @RequestParam String name) {
+		
+		return new Students(id, name);
+	}
 	
 }
