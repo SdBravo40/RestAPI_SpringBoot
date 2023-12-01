@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,7 +45,7 @@ public class ApiController {
 	
 	//Story of PathVariable
 	// {id} - URI Template Variable
-	
+	// it is used to bind uri tempalte variable into method arguments
 	@GetMapping("/students/{id}")
 	public Students studentPathVaiable(@PathVariable("id") int studentId) {
 		Students s = new Students(studentId, "Mr. Park");
@@ -59,6 +61,7 @@ public class ApiController {
 	
 	//Story of Request Param
 	//localhost:9090/student/query?id=1
+	// it is used to extract the query parameter from URL
 	
 	@GetMapping("/students/query")
 	public Students studentRequestParam( @RequestParam int id) {
@@ -73,5 +76,18 @@ public class ApiController {
 		
 		return new Students(id, name);
 	}
+	
+	
+	//using postman
+	//requestbody is used to convert jason to java object
+	@PostMapping("/students/create")
+	public Students studentCreate(@RequestBody Students stud) {
+		
+		System.out.println(stud.getId());
+		System.out.println(stud.getName());
+		
+		return stud;
+	}
+	
 	
 }
